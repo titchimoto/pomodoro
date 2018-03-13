@@ -4,50 +4,56 @@ class Timer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      timeRemaining: 3,
-      breakTimeRemaining: 4,
+      timeRemaining: 1500,
+      breakTimeRemaining: 300,
+      onBreak: false,
       completedSessions: 0,
       completedFiveMinuteBreaks: 0
+
     };
   }
 
+
+
   componentDidMount(){
-    this.interval = setInterval(
-      () => {
-        if (this.state.timeRemaining > 0) {
-          this.setState(prevState => ({ timeRemaining: prevState.timeRemaining - 1 }))
-        } else {
-          clearInterval(this.interval);
-        }
-      }, 1000
-    )
+    // this.interval = setInterval(
+    //   () => {
+    //     if (this.state.timeRemaining > 0) {
+    //       this.setState(prevState => ({ timeRemaining: prevState.timeRemaining - 1 }))
+    //     } else {
+    //       clearInterval(this.interval);
+    //     }
+    //   }, 1000
+    // )
   }
 
   componentWillUnmount(){
     clearInterval(this.interval);
   }
 
-  startTimer(e){
 
-  }
 
   stopTimer(){
 
   }
 
-  resetTimer(){
-    this.setState({ timeRemaining: 5 })
+  startTimer(){
+    this.setState({ timeRemaining: this.state.timeRemaining })
     clearInterval(this.interval);
     this.interval = setInterval(
       () => {
         if (this.state.timeRemaining > 0) {
           this.setState(prevState => ({ timeRemaining: prevState.timeRemaining - 1 }))
         } else {
+          this.setState({ timeRemaining: 300 })
+          this.setState({ onBreak: true })
           clearInterval(this.interval);
         }
       }, 1000
     )
   }
+
+
 
 
   startBreakTimer(){
@@ -58,6 +64,8 @@ class Timer extends Component {
         if (this.state.timeRemaining > 0) {
           this.setState(prevState => ({ timeRemaining: prevState.timeRemaining - 1 }))
         } else {
+          this.setState({ timeRemaining: 1500 })
+          this.setState({ onBreak: false })
           clearInterval(this.interval);
         }
       }, 1000
@@ -80,19 +88,19 @@ class Timer extends Component {
   render(){
     let newSession = null;
     let breakTime = null;
-    if (this.state.timeRemaining > 0) {
+    if (this.state.timeRemaining < 1500 && this.state.onBreak === false) {
         newSession = <div>Want to restart your existing session?
-                       <button onClick={ (e) => this.resetTimer(e) }>Restart</button>
+                       <p><button onClick={ (e) => this.startTimer(e) }>Restart</button></p>
                      </div>
-    } else {
+    } else if (this.state.timeRemaining === 1500) {
         newSession = <div>Ready to start another session?
-                       <button onClick={ (e) => this.resetTimer(e) }>Start</button>
+                       <p><button onClick={ (e) => this.startTimer(e) }>Start</button></p>
                      </div>
     }
 
-    if (this.state.timeRemaining === 0) {
+    if (this.state.timeRemaining === 300) {
       breakTime = <div>Ready for that well earned break?
-                    <button onClick={ (e) => this.startBreakTimer(e) }>Start Break</button>
+                    <p><button onClick={ (e) => this.startBreakTimer(e) }>Start Break</button></p>
                   </div>
     }
 
