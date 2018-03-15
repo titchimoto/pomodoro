@@ -80,37 +80,39 @@ class Timer extends Component {
     let breakTime = null;
     if (this.state.timeRemaining < 1500 && this.state.onBreak === false) {
         newSession = <div>Work Session
-                       <p><button onClick={ (e) => this.startTimer(1500) }>Restart Session</button></p>
+                       <p><button className="stop-timer" onClick={ (e) => this.startTimer(1500) }>Restart Session</button></p>
                      </div>
     } else if (this.state.timeRemaining === 1500 && this.state.onBreak === false) {
         newSession = <div>Ready to start another session?
-                       <p><button onClick={ (e) => this.startTimer(1500) }>Start Session</button></p>
+                       <p><button className="start-timer" onClick={ (e) => this.startTimer(1500) }>Start Session</button></p>
                      </div>
     }
 
   if (this.state.completedSessions % 4 === 0 && this.state.timeRemaining === 1800 && this.state.onBreak === true) {
     breakTime = <div>Congratulations on completing 4 successive work sessions. Here, enjoy a 30 minute break to celebrate!
-                  <p><button onClick={ (e) => this.startBreakTimer(1800) }>Start Break</button></p>
+                  <p><button className="start-timer" onClick={ (e) => this.startBreakTimer(1800) }>Start Break</button></p>
                 </div>
     } else if (this.state.timeRemaining === 300 && this.state.onBreak === true) {
       breakTime = <div>Ready for that well earned break?
-                    <p><button onClick={ (e) => this.startBreakTimer(300) }>Start Break</button></p>
+                    <p><button className="start-timer" onClick={ (e) => this.startBreakTimer(300) }>Start Break</button></p>
                   </div>
     }
 
 
     return(
-      <div>
-        <div className="timer">{this.formatTime(this.state.timeRemaining)}</div>
+      <section className="timer-container">
+      <h1>{this.props.activeTask}</h1>
+
+        <div id="timer">{this.formatTime(this.state.timeRemaining)}</div>
 
         {breakTime}
         {newSession}
         <p>Consecutive Completed Work Sessions: { this.state.completedSessions || 0 }</p>
         <small>(Complete 4 in a row to earn a well-deserve 30 minute break!)</small>
 
-        <p><button onClick={ (e) => this.stopTimer() }>Stop Timer</button></p>
+        <p><button className="stop-timer" onClick={ (e) => this.stopTimer() }>Stop Timer</button></p>
 
-      </div>
+      </section>
     );
   }
 }
