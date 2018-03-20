@@ -1,0 +1,17 @@
+.timer-container {
+  text-align: center;
+
+}
+
+#timer {
+  font-size: 4.0rem;
+  margin: 40px;
+}
+
+.stop-session {
+  margin-top: 30px;
+}
+
+.btn-success {
+  margin-bottom: 20px;
+}

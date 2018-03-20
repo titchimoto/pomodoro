@@ -1,0 +1,29 @@
+.tasks-container {
+  /* float: left;
+  width: 25%; */
+}
+
+#task-list {
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+li {
+  padding: 5px;
+}
+
+li:hover{
+  background-color: #EEEEEE;
+}
+
+.submit-button {
+  margin-top: 10px;
+}
+
+.delete-button {
+  color: red;
+}
+
+.list-group-item {
+  font-size: 0.8rem;
+}

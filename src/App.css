@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Chewy');
+
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -8,14 +10,17 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: crimson;
+  height: 140px;
   padding: 20px;
   color: white;
+  margin-bottom: 20px;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-family: 'Chewy', cursive;
+  font-size: 5.0rem;
+  color: #ffffff;
 }
 
 .App-intro {
